@@ -1,15 +1,29 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
-import NProgress from 'nprogress';
-import 'nprogress/nprogress.css';
+import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 
 // 配置路由
-const routes: Array<RouteRecordRaw> = [{
-  path: '/',
-  name: 'Home',
-  component: () => import('@/views/home/index.vue'),
+const otherRoutes: RouteRecordRaw = {
+  path: "/about",
+  name: "About",
+  component: () => import("@/views/about/index.vue"),
   meta: {},
   children: [],
-}];
+};
+// Vite 支持使用特殊的 import.meta.glob 函数从文件系统导入多个模块：
+const modules: Record<string, any> = import.meta.glob(["./modules/*.ts"], {
+  eager: true,
+});
+console.log("modules", modules);
+
+// 配置路由
+const routes: Array<RouteRecordRaw> = [];
+Object.keys(modules).forEach((key) => {
+  const module = modules[key].default;
+  routes.push(module);
+  console.log("routes", routes);
+});
+routes.push(otherRoutes);
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -18,7 +32,7 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   NProgress.start();
-  next()
+  next();
 });
 
 router.afterEach((to) => {
