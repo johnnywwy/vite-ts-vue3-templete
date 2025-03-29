@@ -19,6 +19,8 @@ export const useUserStoreHook = defineStore("userInfo", {
   actions: {
     storeUserLogin(data) {
       return userLogin(data).then((res) => {
+        console.log("resss", res);
+
         this.username = res.username;
         this.roles = res.roles;
         this.accessToken = res.accessToken;
