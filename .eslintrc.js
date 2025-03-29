@@ -7,8 +7,10 @@ module.exports = {
   },
   // 引入推荐的语法校验规则
   extends: [
+    "eslint:recommended",
     "plugin:vue/vue3-recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended", // 在最后面新增extends
   ],
   overrides: [],
   /* 
