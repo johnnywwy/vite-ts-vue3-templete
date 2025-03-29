@@ -30,9 +30,18 @@ const router = createRouter({
   routes,
 });
 
+const noStatusPage = ["/login", "/about"];
 router.beforeEach(async (to, from, next) => {
   NProgress.start();
-  next();
+  const token = sessionStorage.getItem("userInfo");
+  console.log("token", token);
+
+  const userIsLogin = token ? true : false;
+  if (userIsLogin || noStatusPage.includes(to.path)) {
+    next();
+  } else {
+    next("/login");
+  }
 });
 
 router.afterEach((to) => {

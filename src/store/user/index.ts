@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import pinia from "@/store";
 import { UserStore } from "./types";
 import { refreshUserInfo, userLogin } from "@/api/user";
+import router from "@/router";
 
 export type LoginRequest = {
   username: string;
@@ -19,13 +20,16 @@ export const useUserStoreHook = defineStore("userInfo", {
   actions: {
     storeUserLogin(data) {
       return userLogin(data).then((res) => {
-        console.log("resss", res);
-
         this.username = res.username;
         this.roles = res.roles;
         this.accessToken = res.accessToken;
         return res;
       });
+    },
+    logout() {
+      sessionStorage.removeItem("userInfo");
+      this.accessToken = "";
+      router.push("/login");
     },
     stroeRefreshUserInfo() {
       if (this.username == "大伟" && this.accessToken != "") {
@@ -42,11 +46,11 @@ export const useUserStoreHook = defineStore("userInfo", {
           });
       }
     },
-    persist: {
-      key: "userInfo",
-      storage: sessionStorage,
-      paths: ["accessToken"],
-    },
+  },
+  persist: {
+    key: "userInfo",
+    storage: sessionStorage,
+    paths: ["accessToken"],
   },
 });
 

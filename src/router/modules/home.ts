@@ -1,7 +1,15 @@
 export default {
   path: "/",
-  name: "Home",
-  component: () => import("@/views/home/index.vue"),
+  name: "Layout",
+  component: () => import("@/layout/index.vue"),
   meta: {},
-  children: [],
+  children: [
+    {
+      path: "/",
+      name: "HomePage",
+      component: () => import("@/views/home/index.vue"),
+      meta: {},
+      children: [],
+    },
+  ],
 };
