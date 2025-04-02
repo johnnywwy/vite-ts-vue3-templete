@@ -21,3 +21,8 @@ export const userLogin = async (data?: LoginRequest) => {
 export const refreshUserInfo = async (data?: reLoginRequest) => {
   return post<LoginResponse>({}, "/getUserInfo", data);
 };
+
+// 获取所有用户角色
+export const getUserList = () => {
+  return get({}, "/getUserList");
+};

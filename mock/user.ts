@@ -1,5 +1,6 @@
 import { MockMethod } from "vite-plugin-mock";
 export default [
+  // 用户登录接口
   {
     // 前面的 /mock 为 mock 生效需要配置的根路径 后面会提到
     url: "/mock/api/login",
@@ -44,4 +45,94 @@ export default [
       }
     },
   },
+  // 获取用户信息的接口
+  {
+    // 获取用户信息的接口
+    url: '/mock/api/getUserInfo',
+    method: 'post',
+    response: ({ body }) => {
+      if (body.accessToken === 'dawei') {
+        return {
+          code: 0,
+          message: '登录成功',
+          data: {
+            username: 'dawei',
+            roles: ['admin'],
+            accessToken: 'dawei'
+          }
+        };
+      } else if (body.accessToken === 'common') {
+        return {
+          code: 0,
+          message: '登录成功',
+          data: {
+            username: 'common',
+            roles: ['common'],
+            accessToken: 'common'
+          }
+        };
+      } else {
+        return {
+          code: 1,
+          message: 'Token失效',
+          data: {
+            username: '',
+            roles: [],
+            accessToken: ''
+          }
+        };
+      }
+    }
+  },
+  // 获取用户列表的接口
+  {
+    // 获取用户列表的接口
+    url: '/mock/api/getUserList',
+    method: 'get',
+    response: () => {
+      return {
+        code: 0,
+        message: '获取成功',
+        data: [
+          {
+            id: 1,
+            nickName: '张三',
+            userName: '张三',
+            role: [
+              {
+                role: 1,
+                roleName: '管理员'
+              },
+              {
+                role: 2,
+                roleName: '普通用户'
+              }
+            ]
+          },
+          {
+            id: 2,
+            nickName: '李四',
+            userName: '李四',
+            role: [
+              {
+                role: 1,
+                roleName: '管理员'
+              }
+            ]
+          },
+          {
+            id: 3,
+            nickName: '王五',
+            userName: '王五',
+            role: [
+              {
+                role: 2,
+                roleName: '普通用户'
+              }
+            ]
+          }
+        ]
+      };
+    }
+  }
 ] as MockMethod[];
