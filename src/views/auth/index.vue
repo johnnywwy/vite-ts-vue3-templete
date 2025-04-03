@@ -14,10 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-// import { useRoute } from "vue-router";
 import { getAuthList } from "@/api/auth";
-import { useRoute } from "vue-router";
 const checkedNode = ref<number[]>([]);
 
 const treeRef = ref<any>(null);

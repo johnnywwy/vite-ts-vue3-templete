@@ -23,7 +23,6 @@
 
 <script setup lang='ts'>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
 import { useUserStoreHook } from '@/store/user';
 const userStore = useUserStoreHook();
 const userName = userStore.username;

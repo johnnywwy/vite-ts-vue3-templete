@@ -31,10 +31,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
 import { ElMessageBox, ElMessage } from "element-plus";
 import { getRoleList } from "@/api/role";
-import { useRouter } from "vue-router";
 
 const router = useRouter();
 interface IRole {

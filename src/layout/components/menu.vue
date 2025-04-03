@@ -6,21 +6,18 @@
   </el-menu>
 </template>
 
-<script setup lang='ts'>
-import { ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+<script setup lang="ts">
+import { ref } from "vue";
+const router = useRouter();
+const route = useRoute();
 
-const router = useRouter()
-const route = useRoute()
-
-const activeMenu = ref(route.path)
+const activeMenu = ref(route.path);
 const menuList = router.getRoutes().filter((route) => {
-  return route.meta.isShow
-})
-
+  return route.meta.isShow;
+});
 </script>
 
-<style lang='less' scoped>
+<style lang="less" scoped>
 .el-menu {
   height: 100%;
 }
