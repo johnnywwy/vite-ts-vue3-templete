@@ -8,7 +8,7 @@ export default [
     response: () => {
       return {
         code: 0,
-        message: "success",
+        message: "获取成功",
         data: [
           {
             userId: 1,

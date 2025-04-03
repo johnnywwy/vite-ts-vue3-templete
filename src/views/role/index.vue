@@ -34,7 +34,9 @@
 import { ref, onMounted } from "vue";
 import { ElMessageBox, ElMessage } from "element-plus";
 import { getRoleList } from "@/api/role";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 interface IRole {
   role?: number; // 角色id
   roleName: string; // 角色名称
@@ -74,6 +76,16 @@ const onAddRole = () => {
         message: `点击了取消按钮`,
       });
     });
+};
+
+const onChangeRole = (row: IRole) => {
+  router.push({
+    path: "auth",
+    query: {
+      id: row.role,
+      auth: row.authority,
+    },
+  });
 };
 </script>
 

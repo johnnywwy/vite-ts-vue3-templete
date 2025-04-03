@@ -17,16 +17,24 @@
 import { ref, onMounted } from "vue";
 // import { useRoute } from "vue-router";
 import { getAuthList } from "@/api/auth";
+import { useRoute } from "vue-router";
+const checkedNode = ref<number[]>([]);
+
+const treeRef = ref<any>(null);
+const authList = ref<IAuth[]>([]);
+const route = useRoute();
+
+const { query } = route;
+
+if (query.auth) {
+  checkedNode.value = query.auth;
+}
 
 interface IAuth {
   name: string; // 权限名称
   roleId: number; // 角色ID
   roleList?: IAuth[]; // 角色列表 子权限
 }
-
-const treeRef = ref<any>(null);
-const authList = ref<IAuth[]>([]);
-const checkedNode = ref<number[]>([]);
 
 const onChangeAuth = () => {
   console.log(treeRef.value);
