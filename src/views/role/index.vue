@@ -31,14 +31,9 @@
 </template>
 
 <script setup lang="ts">
-import { getRoleList } from "@/api/role";
+import { getRoleList, IRole } from "@/api/role";
 
 const router = useRouter();
-interface IRole {
-  role?: number; // 角色id
-  roleName: string; // 角色名称
-  authority: any[];
-}
 let roleList = ref<IRole[]>([]);
 
 onMounted(() => {
