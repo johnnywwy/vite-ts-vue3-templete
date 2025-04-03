@@ -6,7 +6,6 @@ import type {
   AxiosError,
   InternalAxiosRequestConfig,
 } from "axios";
-import { ElMessage } from "element-plus";
 import { getMessageInfo } from "./status";
 
 interface BaseResponse<T = any> {

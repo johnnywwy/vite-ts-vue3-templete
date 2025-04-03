@@ -31,7 +31,6 @@
 </template>
 
 <script setup lang="ts">
-import { ElMessageBox, ElMessage } from "element-plus";
 import { getRoleList } from "@/api/role";
 
 const router = useRouter();

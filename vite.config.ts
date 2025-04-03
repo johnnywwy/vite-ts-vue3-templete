@@ -23,6 +23,13 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
     base: "/",
     publicDir: fileURLToPath(new URL("./public", import.meta.url)), // 无需处理的静态资源位置
     assetsInclude: fileURLToPath(new URL("./src/assets", import.meta.url)), // 需要处理的静态资源位置
+    css: {
+      preprocessorOptions: {
+        less: {
+          additionalData: `@import '@/styles/variable.less';`
+        }
+      }
+    },
     plugins: [
       // Vue模板文件编译插件
       vue(),
@@ -38,6 +45,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       ElementPlus({}),
       // 自动导入组件
       AutoImport({
+        // 定义自动引入的依赖
         imports: ['vue', 'vue-router', 'pinia'],
         resolvers: [ElementPlusResolver(), IconsResolver()],
         dts: fileURLToPath(
