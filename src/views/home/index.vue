@@ -1,22 +1,11 @@
 <template>
   <div class="wrap-content">
-    <el-form
-      :inline="true"
-      label="名称"
-      :model="searchData"
-      class="search-form"
-    >
+    <el-form :inline="true" label="名称" :model="searchData" class="search-form">
       <el-form-item>
-        <el-input
-          v-model="searchData.title"
-          placeholder="请输入名称"
-        ></el-input>
+        <el-input v-model="searchData.title" placeholder="请输入名称"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-input
-          v-model="searchData.introduce"
-          placeholder="请输入详情"
-        ></el-input>
+        <el-input v-model="searchData.introduce" placeholder="请输入详情"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSearchGoods()">查询</el-button>
@@ -28,21 +17,13 @@
       <el-table-column prop="introduce" label="详情"></el-table-column>
     </el-table>
     <!-- 分页 -->
-    <el-pagination
-      class="pagination"
-      background
-      layout="sizes, prev, pager, next"
-      :total="searchData.dataCount"
-      :page-size="searchData.pageSize"
-      :page-sizes="[5, 10, 15, 20]"
-      @current-change="handleCurrentChange"
-      @size-change="handleSizeChange"
-    />
+    <el-pagination class="pagination" background layout="sizes, prev, pager, next" :total="searchData.dataCount"
+      :page-size="searchData.pageSize" :page-sizes="[5, 10, 15, 20]" @current-change="handleCurrentChange"
+      @size-change="handleSizeChange" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { reactive, onMounted, computed, ref, watch } from "vue";
 import { getProjectList, IProject } from "@/api/project";
 // 项目接口
 

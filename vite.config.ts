@@ -26,9 +26,9 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
     css: {
       preprocessorOptions: {
         less: {
-          additionalData: `@import '@/styles/variable.less';`
-        }
-      }
+          additionalData: `@import '@/styles/variable.less';`,
+        },
+      },
     },
     plugins: [
       // Vue模板文件编译插件
@@ -46,7 +46,11 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       // 自动导入组件
       AutoImport({
         // 定义自动引入的依赖
-        imports: ['vue', 'vue-router', 'pinia'],
+        imports: ["vue", "vue-router", "pinia"],
+        // 处理 eslint
+        eslintrc: {
+          enabled: true,
+        },
         resolvers: [ElementPlusResolver(), IconsResolver()],
         dts: fileURLToPath(
           new URL("./types/auto-imports.d.ts", import.meta.url)
