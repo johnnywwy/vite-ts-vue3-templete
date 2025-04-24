@@ -2,7 +2,10 @@ export default {
   path: "/",
   name: "Layout",
   component: () => import("@/layout/index.vue"),
-  meta: {},
+  meta: {
+    role: ['common', 'admin'],
+    parentHome: 'Home'
+  },
   children: [
     {
       path: "/",
@@ -11,6 +14,7 @@ export default {
       meta: {
         isShow: true,
         title: "项目介绍",
+        parentHome: 'Home'
       },
       children: [],
     },
