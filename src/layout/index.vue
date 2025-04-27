@@ -35,4 +35,8 @@ import { ArrowRight } from "@element-plus/icons-vue";
 .el-container {
   height: 100%;
 }
+
+.el-breadcrumb {
+  margin-bottom: 16px;
+}
 </style>
