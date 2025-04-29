@@ -2,10 +2,11 @@ export default {
   path: "/",
   name: "Layout",
   component: () => import("@/layout/index.vue"),
-  meta: {
-    role: ["common", "admin"],
-    parentHome: "Home",
-  },
+  redirect: '/',
+  // meta: {
+  //   role: ["common", "admin"],
+  //   parentRouter: "Home",
+  // },
   children: [
     {
       path: "/",
@@ -14,7 +15,7 @@ export default {
       meta: {
         isShow: true,
         title: "首页",
-        parentHome: "Home",
+        parentRouter: "Layout",
       },
       children: [],
     },
@@ -25,7 +26,7 @@ export default {
       meta: {
         isShow: true,
         title: "项目模块",
-        parentHome: "Home",
+        parentRouter: "Layout",
       },
       children: [],
     },
@@ -36,6 +37,7 @@ export default {
       meta: {
         title: "用户模块",
         isShow: true,
+        parentRouter: "Layout",
       },
       children: [],
     },
@@ -46,6 +48,8 @@ export default {
       meta: {
         title: "角色模块",
         isShow: true,
+        parentRouter: "Layout",
+
       },
       children: [],
     },
@@ -56,16 +60,18 @@ export default {
       meta: {
         title: "权限模块",
         isShow: true,
+        parentRouter: "Layout",
       },
       children: [],
     },
     {
       path: "/p",
       name: "ParentPage",
-      // component: () => import("@/views/home/index.vue"),
+      component: () => import("@/views/home/index.vue"),
       meta: {
         isShow: true,
         title: "父菜单",
+        parentRouter: "Layout",
       },
       children: [
         {
@@ -74,6 +80,7 @@ export default {
           meta: {
             title: "子菜单 1",
             isShow: true,
+            parentRouter: "ParentPage",
           },
         },
         {
@@ -82,6 +89,8 @@ export default {
           meta: {
             title: "子菜单 2",
             isShow: true,
+            parentRouter: "ParentPage",
+
           },
         },
         {
@@ -90,6 +99,7 @@ export default {
           meta: {
             title: "子菜单 3",
             isShow: true,
+            parentRouter: "ParentPage",
           },
         },
       ],
