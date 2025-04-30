@@ -1,7 +1,8 @@
-import { createRouter, createWebHashHistory, RouteRecord, RouteRecordNormalized, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { useSettingStore } from '@/store/setting'
+import { getTitle } from "@/utils";
 
 const settingStore = useSettingStore()
 
@@ -31,22 +32,6 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes,
 });
-
-export const getTitle = (name: string, routes: RouteRecordNormalized[]) => {
-  const names: string[] = []
-  while (true) {
-    names.push(name)
-    const currentRouterObj = routes.find((item) => item.name === name)
-    const parentRouterObj = routes.find((item) => item.name === currentRouterObj?.meta?.parentRouter)
-    if (parentRouterObj) {
-      name = parentRouterObj.name as string
-      continue
-    } else {
-      break
-    }
-  }
-  return names.reverse()
-}
 
 const handleRouters = (currentName: string) => {
   console.log('name', currentName);
