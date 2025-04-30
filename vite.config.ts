@@ -109,12 +109,21 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
         input: {
           index: fileURLToPath(new URL("./index.html", import.meta.url)),
         },
+        // 每个文件发现的第一个副作用打印到控制台
+        experimentalLogSideEffects: true,
         // 静态资源分类打包
         output: {
-          format: "esm",
-          chunkFileNames: "static/js/[name]-[hash].js",
-          entryFileNames: "static/js/[name]-[hash].js",
-          assetFileNames: "static/[ext]/[name]-[hash].[ext]",
+          // format: "esm",
+          // chunkFileNames: "static/js/[name]-[hash].js",
+          // entryFileNames: "static/js/[name]-[hash].js",
+          // assetFileNames: "static/[ext]/[name]-[hash].[ext]",
+          experimentalMinChunkSize: 20 * 1024,
+          manualChunks: (id: string) => {
+            if (id.includes('node_modules')) {
+              return 'vender'
+            }
+            return 'index'
+          }
         },
       },
     },
