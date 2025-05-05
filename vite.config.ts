@@ -10,6 +10,16 @@ import Components from "unplugin-vue-components/vite";
 import IconsResolver from "unplugin-icons/resolver";
 import ElementPlus from "unplugin-element-plus/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
+import externalGlobals from "rollup-plugin-external-globals"
+import { visualizer } from 'rollup-plugin-visualizer';
+
+const globals = externalGlobals({
+  moment: 'moment',
+  'video.js': 'videojs',
+  jspdf: 'jspdf',
+  xlsx: 'XLSX',
+  echart: 'echart'
+});
 
 export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
   // 获取当前工作目录
@@ -109,6 +119,10 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
         input: {
           index: fileURLToPath(new URL("./index.html", import.meta.url)),
         },
+        // 不打包 
+        external: ['moment', 'video.js', 'jspdf', 'xlsx', 'echart'],
+        // 
+        plugins: [visualizer({ open: true }), globals],
         // 每个文件发现的第一个副作用打印到控制台
         experimentalLogSideEffects: true,
         treeshake: {
