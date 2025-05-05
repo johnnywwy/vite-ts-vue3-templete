@@ -111,6 +111,10 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
         },
         // 每个文件发现的第一个副作用打印到控制台
         experimentalLogSideEffects: true,
+        treeshake: {
+          preset: 'smallest',
+          // propertyReadSideEffects: true
+        },
         // 静态资源分类打包
         output: {
           // format: "esm",
@@ -119,6 +123,10 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
           // assetFileNames: "static/[ext]/[name]-[hash].[ext]",
           experimentalMinChunkSize: 20 * 1024,
           manualChunks: (id: string) => {
+            // html2canvas 只有极少数页面用到 所以单独处理一下 第三方库分类打包
+            if (id.includes('html2canvas')) {
+              return 'html2canvas'
+            }
             if (id.includes('node_modules')) {
               return 'vender'
             }
