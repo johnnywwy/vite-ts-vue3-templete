@@ -12,6 +12,7 @@ import ElementPlus from "unplugin-element-plus/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import externalGlobals from "rollup-plugin-external-globals"
 import { visualizer } from 'rollup-plugin-visualizer';
+import ViteCompression from 'vite-plugin-compression';
 
 const globals = externalGlobals({
   moment: 'moment',
@@ -41,6 +42,12 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       },
     },
     plugins: [
+      // 压缩配置
+      ViteCompression({
+        threshold: 1024 * 20, // 超过20kb才进行压缩
+        ext: '.gz', // 压缩后缀
+        algorithm: 'gzip' // 压缩算法
+      }),
       // Vue模板文件编译插件
       vue(),
       // jsx文件编译插件
@@ -132,20 +139,20 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
         // 静态资源分类打包
         output: {
           // format: "esm",
-          // chunkFileNames: "static/js/[name]-[hash].js",
-          // entryFileNames: "static/js/[name]-[hash].js",
-          // assetFileNames: "static/[ext]/[name]-[hash].[ext]",
           experimentalMinChunkSize: 20 * 1024,
           manualChunks: (id: string) => {
             // html2canvas 只有极少数页面用到 所以单独处理一下 第三方库分类打包
-            if (id.includes('html2canvas')) {
-              return 'html2canvas'
-            }
+            // if (id.includes('html2canvas')) {
+            //   return 'html2canvas'
+            // }
             if (id.includes('node_modules')) {
               return 'vender'
             }
-            return 'index'
-          }
+            // return 'index'
+          },
+          chunkFileNames: "static/js/chunk-[hash].js",
+          entryFileNames: "static/js/entry-[hash].js",
+          assetFileNames: "static/[ext]/[name]-[hash].[ext]",
         },
       },
     },
