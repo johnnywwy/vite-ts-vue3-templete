@@ -126,7 +126,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
         // 每个文件发现的第一个副作用打印到控制台
         experimentalLogSideEffects: true,
         treeshake: {
-          preset: 'smallest',
+          preset: 'recommended',//默认模式
           // propertyReadSideEffects: true
         },
         // 静态资源分类打包
