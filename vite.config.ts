@@ -13,6 +13,7 @@ import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import externalGlobals from "rollup-plugin-external-globals"
 import { visualizer } from 'rollup-plugin-visualizer';
 import ViteCompression from 'vite-plugin-compression';
+import brotli from 'rollup-plugin-brotli';
 
 const globals = externalGlobals({
   moment: 'moment',
@@ -42,12 +43,15 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       },
     },
     plugins: [
-      // 压缩配置
-      ViteCompression({
-        threshold: 1024 * 20, // 超过20kb才进行压缩
-        ext: '.gz', // 压缩后缀
-        algorithm: 'gzip' // 压缩算法
-      }),
+      // br压缩
+      // brotli({}),
+
+      // gzip压缩配置
+      // ViteCompression({
+      //   threshold: 1024 * 20, // 超过20kb才进行压缩
+      //   ext: '.gz', // 压缩后缀
+      //   algorithm: 'gzip' // 压缩算法
+      // }),
       // Vue模板文件编译插件
       vue(),
       // jsx文件编译插件
@@ -142,17 +146,17 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
           experimentalMinChunkSize: 20 * 1024,
           manualChunks: (id: string) => {
             // html2canvas 只有极少数页面用到 所以单独处理一下 第三方库分类打包
-            // if (id.includes('html2canvas')) {
-            //   return 'html2canvas'
-            // }
+            if (id.includes('html-canvans')) {
+              return 'html-canvans';
+            }
             if (id.includes('node_modules')) {
               return 'vender'
             }
             // return 'index'
           },
-          chunkFileNames: "static/js/chunk-[hash].js",
-          entryFileNames: "static/js/entry-[hash].js",
-          assetFileNames: "static/[ext]/[name]-[hash].[ext]",
+          chunkFileNames: 'static/js/[name]-[hash].js', // 代码分割后文件名
+          entryFileNames: 'static/js/[name]-[hash:6].js', // 入口文件名
+          assetFileNames: 'static/[ext]/[name]-[hash].[ext]' // 静态资源文件名
         },
       },
     },

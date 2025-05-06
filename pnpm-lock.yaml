@@ -99,6 +99,9 @@ importers:
       prettier:
         specifier: ^3.0.3
         version: 3.5.3
+      rollup-plugin-brotli:
+        specifier: ^3.1.0
+        version: 3.1.0
       rollup-plugin-external-globals:
         specifier: ^0.13.0
         version: 0.13.0(rollup@3.29.5)
@@ -2393,6 +2396,10 @@ packages:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
     deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
+
+  rollup-plugin-brotli@3.1.0:
+    resolution: {integrity: sha512-vXRPVd9B1x+aaXeBdmLKNNsai9AH3o0Qikf4u0m1icKqgi3qVA4UhOfwGaPYoAHML1GLMUnR//PDhiMHXN/M6g==}
+    engines: {node: '>=11.7.0'}
 
   rollup-plugin-external-globals@0.13.0:
     resolution: {integrity: sha512-wBS3hmoF0OtEnA0lWsmTC6Nhnkk2zjZbfhaX2gLo8VnfNGFdGhiYKwMpIPQPrYbAw+mAYUYmoHYktAl1eZHgVw==}
@@ -5256,6 +5263,8 @@ snapshots:
   rimraf@3.0.2:
     dependencies:
       glob: 7.2.3
+
+  rollup-plugin-brotli@3.1.0: {}
 
   rollup-plugin-external-globals@0.13.0(rollup@3.29.5):
     dependencies:
