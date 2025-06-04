@@ -1,0 +1,1 @@
+import{_ as t}from"./index-5cc076.js";import{b as o,c as n,k as r}from"./vender-61ea62b0.js";const s={},c={class:"wrap-content"};function a(_,e){return o(),n("div",c,e[0]||(e[0]=[r("h1",null,"Vite + Vue3",-1)]))}const f=t(s,[["render",a]]);export{f as default};
