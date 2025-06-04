@@ -6,7 +6,6 @@ import type {
   AxiosError,
   InternalAxiosRequestConfig,
 } from "axios";
-import { ElMessage } from "element-plus";
 import { getMessageInfo } from "./status";
 
 interface BaseResponse<T = any> {
@@ -39,12 +38,13 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   (response: AxiosResponse) => {
     if (response.status === 200) {
-      return response.data;
+      return response;
     }
     ElMessage({
       message: getMessageInfo(response.status),
       type: "error",
     });
+    return response;
   },
   // 请求失败
   (error: any) => {
@@ -66,10 +66,9 @@ service.interceptors.response.use(
 // 此处相当于二次响应拦截
 // 为响应数据进行定制化处理
 const requestInstance = <T = any>(config: AxiosRequestConfig): Promise<T> => {
-  const conf = config;
   return new Promise((resolve, reject) => {
     service
-      .request<any, AxiosResponse<BaseResponse>>(conf)
+      .request<any, AxiosResponse<BaseResponse>>(config)
       .then((res: AxiosResponse<BaseResponse>) => {
         const data = res.data; // 如果data.code为错误代码返回message信息
         if (data.code != 0) {
@@ -82,7 +81,10 @@ const requestInstance = <T = any>(config: AxiosRequestConfig): Promise<T> => {
           ElMessage({
             message: data.message,
             type: "success",
-          }); // 此处返回data信息 也就是 api 中配置好的 Response类型
+            duration: 800
+          });
+
+          // 此处返回data信息 也就是 api 中配置好的 Response类型
           resolve(data.data as T);
         }
       });

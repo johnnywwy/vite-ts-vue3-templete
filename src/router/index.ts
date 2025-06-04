@@ -1,6 +1,10 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+import { useSettingStore } from '@/store/setting'
+import { getTitle } from "@/utils";
+
+const settingStore = useSettingStore()
 
 // 配置路由
 const otherRoutes: RouteRecordRaw = {
@@ -14,14 +18,13 @@ const otherRoutes: RouteRecordRaw = {
 const modules: Record<string, any> = import.meta.glob(["./modules/*.ts"], {
   eager: true,
 });
-console.log("modules", modules);
 
 // 配置路由
 const routes: Array<RouteRecordRaw> = [];
 Object.keys(modules).forEach((key) => {
   const module = modules[key].default;
   routes.push(module);
-  console.log("routes", routes);
+  // console.log("routes", routes);
 });
 routes.push(otherRoutes);
 
@@ -30,9 +33,28 @@ const router = createRouter({
   routes,
 });
 
+const handleRouters = (currentName: string) => {
+  console.log('name', currentName);
+  console.log('getRouters', router.getRoutes());
+
+  const titles = getTitle(currentName, router.getRoutes())
+  settingStore.setTitle(titles)
+}
+
+const noStatusPage = ["/login", "/about"];
 router.beforeEach(async (to, from, next) => {
   NProgress.start();
-  next();
+  const token = sessionStorage.getItem("userInfo");
+  // console.log("token", token);
+
+  const userIsLogin = token ? true : false;
+  if (userIsLogin || noStatusPage.includes(to.path)) {
+    next();
+  } else {
+    next("/login");
+  }
+
+  handleRouters(to.name as string)
 });
 
 router.afterEach((to) => {
