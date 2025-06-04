@@ -2,7 +2,7 @@ name: deploy
 on:
   push:
     branches: [main] # main 分支有 push 时触发
-    paths-ignore:   # 下列文件的变更不触发部署，可以自行添加
+    paths-ignore: # 下列文件的变更不触发部署，可以自行添加
       - README.md
 jobs:
   deploy:
@@ -17,8 +17,8 @@ jobs:
       - name: Build
         uses: actions/setup-node@master
         with:
-          node-version: '20.x'
-      - run: npm install # 安装依赖
+          node-version: "20.x"
+      - run: npm install --legacy-peer-deps # 安装依赖
       - run: npm run build # 打包
 
       # 部署到 GitHub pages
