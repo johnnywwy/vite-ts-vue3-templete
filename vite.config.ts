@@ -163,17 +163,23 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
           experimentalMinChunkSize: 20 * 1024,
           manualChunks: (id: string) => {
             // html2canvas 只有极少数页面用到 所以单独处理一下 第三方库分类打包
-            if (id.includes('html-canvans')) {
-              return 'html-canvans';
-            }
+            // if (id.includes('html-canvans')) {
+            //   return 'html-canvans';
+            // }
             if (id.includes('node_modules')) {
               return 'vender'
             }
+            if (id.includes('src/views/about')) {
+              return 'about'
+            }
+            if (id.includes('src/views/auth')) {
+              return 'about'
+            }
             // return 'index'
           },
-          chunkFileNames: 'static/js/[name]-[hash].js', // 代码分割后文件名
-          entryFileNames: 'static/js/[name]-[hash:6].js', // 入口文件名
-          assetFileNames: 'static/[ext]/[name]-[hash].[ext]' // 静态资源文件名
+          // chunkFileNames: 'static/js/[name]-[hash].js', // 代码分割后文件名
+          // entryFileNames: 'static/js/[name]-[hash:6].js', // 入口文件名
+          // assetFileNames: 'static/[ext]/[name]-[hash].[ext]' // 静态资源文件名
         },
       },
     },
