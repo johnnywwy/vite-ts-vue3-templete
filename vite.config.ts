@@ -45,20 +45,20 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
     },
     plugins: [
       // 自动打包外链配置
-      createHtmlPlugin({
-        inject: {
-          data: {
-            monentscript:
-              '<script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.30.1/locale/af.min.js"></script>',
-            videoscript:
-              '<link href="https://cdn.bootcdn.net/ajax/libs/video.js/8.22.0/alt/video-js-cdn.css" rel="stylesheet">',
-            echartscript: '<script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.6.0/echarts.common.min.js"></script>',
-            jspdfscript: '<script src="https://cdn.bootcdn.net/ajax/libs/pdf.js/5.0.375/pdf.min.mjs"></script>',
-            xlsxscript:
-              '<script src="https://cdn.bootcdn.net/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>'
-          }
-        }
-      }),
+      // createHtmlPlugin({
+      //   inject: {
+      //     data: {
+      //       monentscript:
+      //         '<script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.30.1/locale/af.min.js"></script>',
+      //       videoscript:
+      //         '<link href="https://cdn.bootcdn.net/ajax/libs/video.js/8.22.0/alt/video-js-cdn.css" rel="stylesheet">',
+      //       echartscript: '<script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.6.0/echarts.common.min.js"></script>',
+      //       jspdfscript: '<script src="https://cdn.bootcdn.net/ajax/libs/pdf.js/5.0.375/pdf.min.mjs"></script>',
+      //       xlsxscript:
+      //         '<script src="https://cdn.bootcdn.net/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>'
+      //     }
+      //   }
+      // }),
 
       // br压缩
       // brotli({}),
