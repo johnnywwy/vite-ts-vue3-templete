@@ -12,9 +12,6 @@ import ElementPlus from "unplugin-element-plus/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import externalGlobals from "rollup-plugin-external-globals"
 import { visualizer } from 'rollup-plugin-visualizer';
-import ViteCompression from 'vite-plugin-compression';
-import brotli from 'rollup-plugin-brotli';
-import { createHtmlPlugin } from 'vite-plugin-html';
 
 const globals = externalGlobals({
   moment: 'moment',
@@ -101,7 +98,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       }),
       Icons({
         autoInstall: true,
-      }),
+      })
     ],
     // 运行后本地预览的服务器
     server: {
@@ -129,9 +126,9 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
         [env.VITE_APP_MOCK_BASEURL]: {
           target: "http://localhost:9000",
           // 改变 Host Header
-          changeOrigin: true,
+          // changeOrigin: true,
           // 发起请求时将 '/api' 替换为 ''
-          //rewrite: (path) => path.replace(/^\/api/, ""),
+          // rewrite: (path) => path.replace(/^\/api/, ""),
         },
       },
     },
