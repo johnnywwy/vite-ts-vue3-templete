@@ -33,7 +33,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
     // 项目根目录
     root,
     // 项目部署的基础路径
-    base: "/",
+    base: "./",
     publicDir: fileURLToPath(new URL("./public", import.meta.url)), // 无需处理的静态资源位置
     assetsInclude: fileURLToPath(new URL("./src/assets", import.meta.url)), // 需要处理的静态资源位置
     css: {
@@ -177,9 +177,9 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
             }
             // return 'index'
           },
-          // chunkFileNames: 'static/js/[name]-[hash].js', // 代码分割后文件名
-          // entryFileNames: 'static/js/[name]-[hash:6].js', // 入口文件名
-          // assetFileNames: 'static/[ext]/[name]-[hash].[ext]' // 静态资源文件名
+          chunkFileNames: 'static/js/[name]-[hash].js', // 代码分割后文件名
+          entryFileNames: 'static/js/[name]-[hash:6].js', // 入口文件名
+          assetFileNames: 'static/[ext]/[name]-[hash].[ext]' // 静态资源文件名
         },
       },
     },
